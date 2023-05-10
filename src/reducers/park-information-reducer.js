@@ -19,16 +19,11 @@ const parkInformationReducer = (state, action) => {
         ...state,
         formVisible: true
       }
-    case c.GET_ADD_PARK_SUCCESS:
-      return {
-        ...state,
-        formVisible: false
-      }
     case c.GET_EDIT_PARK_SUCCESS:
       return {
         ...state,
         editFormVisible: false,
-        updateParks: true
+        parkSelected: action.park
       }
     case c.GET_PARK_SELECTION:
       return {
@@ -39,12 +34,6 @@ const parkInformationReducer = (state, action) => {
       return {
         ...state,
         editFormVisible: true
-      }
-    case c.GET_DELETE_SUCCESS:
-      return {
-        ...state,
-        parkSelected: null,
-        updateParks: true
       }
     case c.GET_RESET:
       return {

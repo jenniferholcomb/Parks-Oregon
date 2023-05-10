@@ -5,8 +5,7 @@ import EditParkForm from "./EditParkForm";
 import ParkDetail from "./ParkDetail";
 import parkInformationReducer from "../reducers/park-information-reducer";
 import { getParksFailure, getParksSuccess, getFormVisible, getParkSelection,
-         getAddParkSuccess, getEditParkSuccess, getEditFormVisible, 
-         getReset, getDeleteSuccess } from '../actions/index';
+         getEditParkSuccess, getEditFormVisible, getReset } from '../actions/index';
 
 const initialState = {
   isLoaded: false,
@@ -21,7 +20,7 @@ function ParkController() {
   const [state, dispatch] = useReducer(parkInformationReducer, initialState);
   
   const handleGettingParks = async () => {
-    fetch('https://localhost:5001/api/Parks/', {
+    await fetch('https://localhost:5001/api/Parks/', {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "http://localhost:3000"
@@ -84,7 +83,6 @@ function ParkController() {
   }
 
   const handleEditingPark = async (parkToEdit) => {
-    console.log(parkToEdit.name)
     await fetch(`https://localhost:5001/api/Parks/${parkToEdit.parkId}`, {
       method: 'PUT',
       body: JSON.stringify({
@@ -102,17 +100,19 @@ function ParkController() {
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error(`There is an error`);
-        } else {
-          return response.json()
+          throw new Error(`There is an error`); 
         }
       })
       .then(() => {
-        const action = getEditParkSuccess();
-        dispatch(action);
+        handleGettingParks();
       })
       .then(() => {
-        handleGettingParks();
+        // const id = parkSelected[0].parkId
+        const parkSelectedById = parks.filter(park => park.parkId === parkSelected[0].parkId);
+        console.log(parks)
+        console.log(parkSelectedById)
+        const action = getEditParkSuccess(parkSelectedById);
+        dispatch(action);
       })
       .catch((error) => {
         const action = getParksFailure(error);
@@ -131,8 +131,7 @@ function ParkController() {
         }
     })
     .then(() => {
-        console.log("here");
-        const action = getDeleteSuccess();
+        const action = getReset();
         dispatch(action);
     })
     .then(() => {
@@ -142,23 +141,6 @@ function ParkController() {
       const action = getParksFailure(error);
       dispatch(action);
     });
-    // console.log("here");
-    
-      // .then(response => {
-
-      //   if (!response.ok) {
-      //     throw new Error(`There is an error`);
-      //   } else {
-      //     return response.json()
-      //   }
-      // })
-      // .then(() => {
-
-      // })
-      // .catch((error) => {
-      //   const action = getParksFailure(error);
-      //   dispatch(action);
-      // });
   };
 
   const handleClick = () => {
