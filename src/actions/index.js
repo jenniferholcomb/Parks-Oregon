@@ -13,3 +13,8 @@ export const getParksFailure = (error) => ({
 export const getFormVisible = () => ({
   type: c.GET_FORM_VISIBLE
 });
+
+export const getAddParkSuccess = (parks) => ({
+  type: c.GET_ADD_PARK_SUCCESS,
+  parks
+})

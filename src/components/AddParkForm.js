@@ -1,5 +1,6 @@
 import React from "react";
 import ReusableForm from "./ReusableForm";
+import PropTypes from 'prop-types';
 import { v4 } from "uuid";
 
 function AddParkForm(props) {
@@ -10,9 +11,9 @@ function AddParkForm(props) {
       name: event.target.name.value,
       location: event.target.name.value,
       state: event.target.state.value,
-      type: event.target.state.value,
-      terrain: event.target.state.value,
-      features: event.targe.state.value,
+      type: event.target.type.value,
+      terrain: event.target.terrain.value,
+      features: event.target.features.value,
       parkId: v4()
     });
   }
@@ -28,3 +29,5 @@ function AddParkForm(props) {
 AddParkForm.propTypes = {
   onNewParkCreation: PropTypes.func
 };
+
+export default AddParkForm;

@@ -8,7 +8,8 @@ describe('parkInformationReducer', () => {
   const initialState = {
     isLoaded: false,
     parks: [],
-    error: null
+    error: null,
+    formVisible: false
   };
 
   test('should successfully throw a new error if a non-matching action type is passed into it', () => {
@@ -29,7 +30,8 @@ describe('parkInformationReducer', () => {
     expect(parkInformationReducer(initialState, action)).toEqual({
       isLoaded: true,
       parks: "A park",
-      error: null
+      error: null,
+      formVisible: false
     });
   });
 
@@ -43,7 +45,8 @@ describe('parkInformationReducer', () => {
     expect(parkInformationReducer(initialState, action)).toEqual({
       isLoaded: true,
       parks: [],
-      error: "An error"
+      error: "An error",
+      formVisible: false
     });
   });
 
@@ -57,6 +60,22 @@ describe('parkInformationReducer', () => {
       parks: [],
       error: null,
       formVisible: true
-    })
-  })
+    });
+  });
+
+  test('should successfully change formVisible to false', () => {
+    const parks = "A park";
+    action = {
+      type: c.GET_ADD_PARK_SUCCESS,
+      parks
+    };
+
+    expect(parkInformationReducer(initialState, action)).toEqual({
+      isLoaded: false,
+      parks: [],
+      error: null,
+      parks: "A park",
+      formVisible: false
+    });
+  });
 })

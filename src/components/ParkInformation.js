@@ -1,14 +1,16 @@
 import React, { useReducer, useEffect } from "react";
 import ParksList from "./ParksList";
+import AddParkForm from './AddParkForm';
 import parkInformationReducer from "../reducers/park-information-reducer";
-import { getParksFailure, getParksSuccess, getFormVisible } from './../actions/index';
+import { getParksFailure, getParksSuccess, getFormVisible, getAddParkSuccess } from './../actions/index';
 import { v4 } from "uuid";
 
 const initialState = {
   isLoaded: false,
   parks: [],
   error: null,
-  formVisible: false
+  formVisible: false,
+  updateParks: false
 };
 
 function ParkInformation() {
@@ -67,7 +69,7 @@ function ParkInformation() {
       }
     })
     .then((jsonifiedResponse) => {
-      const action = getParksSuccess(jsonifiedResponse);
+      const action = getAddParkSuccess(jsonifiedResponse);
       dispatch(action);
     })
     .catch((error) => {
@@ -77,7 +79,7 @@ function ParkInformation() {
   }
 
   const { error, isLoaded, parks, formVisible } = state;
-
+  console.log(parks);
   if (error) {
     return <h1>Error: {error}</h1>;
   } else if (!isLoaded) {

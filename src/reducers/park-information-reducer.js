@@ -6,7 +6,8 @@ const parkInformationReducer = (state, action) => {
       return {
         ...state,
         isLoaded: true,
-        parks: action.parks
+        parks: action.parks,
+        updateParks: false
       };
     case c.GET_PARKS_FAILURE:
       return {
@@ -18,6 +19,12 @@ const parkInformationReducer = (state, action) => {
       return {
         ...state,
         formVisible: true
+      }
+    case c.GET_ADD_PARK_SUCCESS:
+      return {
+        ...state,
+        formVisible: false,
+        updateParks: true
       }
     default:
       throw new Error(`There is no action matching ${action.type}.`);
