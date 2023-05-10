@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function EditParkForm(props) {
 
   const { park } = props;
-  console.log(park);
+
   function handleEditParkSubmission(event) {
     event.preventDefault();
     props.onEditParkCreation({

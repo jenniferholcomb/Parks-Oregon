@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useRef } from "react";
 import ParksList from "./ParksList";
 import AddParkForm from './AddParkForm';
 import EditParkForm from "./EditParkForm";
@@ -18,6 +18,7 @@ const initialState = {
 
 function ParkController() {
   const [state, dispatch] = useReducer(parkInformationReducer, initialState);
+  const currentParks = useRef(state.parks);
   
   const handleGettingParks = async () => {
     await fetch('https://localhost:5001/api/Parks/', {
@@ -101,18 +102,16 @@ function ParkController() {
       .then(response => {
         if (!response.ok) {
           throw new Error(`There is an error`); 
-        }
+        } 
       })
       .then(() => {
         handleGettingParks();
-      })
-      .then(() => {
-        // const id = parkSelected[0].parkId
-        const parkSelectedById = parks.filter(park => park.parkId === parkSelected[0].parkId);
-        console.log(parks)
-        console.log(parkSelectedById)
-        const action = getEditParkSuccess(parkSelectedById);
-        dispatch(action);
+        setTimeout(() => {
+          const action = getEditParkSuccess(
+            currentParks.current.filter(park => park.parkId === parkSelected[0].parkId)
+          );
+          dispatch(action);
+        }, 1000)
       })
       .catch((error) => {
         const action = getParksFailure(error);
@@ -165,7 +164,8 @@ function ParkController() {
   };
 
   const { error, isLoaded, parks, formVisible, editFormVisible, parkSelected } = state;
-  console.log(parks);
+  currentParks.current = parks
+
   if (error) {
     return <h1>Error: {error}</h1>;
   } else if (!isLoaded) {
