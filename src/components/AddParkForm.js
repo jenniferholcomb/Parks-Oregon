@@ -1,7 +1,5 @@
 import React from "react";
-import ReusableForm from "./ReusableForm";
 import PropTypes from 'prop-types';
-import { v4 } from "uuid";
 
 function AddParkForm(props) {
 
@@ -14,14 +12,36 @@ function AddParkForm(props) {
       type: event.target.type.value,
       terrain: event.target.terrain.value,
       features: event.target.features.value,
-      parkId: v4()
     });
   }
 
   return (
     <React.Fragment>
-      <ReusableForm formSubmissionHandler={handleNewParkSubmission}
-                    buttonText="ADD PARK" />
+      <form onSubmit={handleNewParkSubmission}>
+        <input
+          type='text'
+          name='name'
+          placeholder='Park Name' required/>
+        <input 
+          type='text'
+          name='location'
+          placeholder='Location' required/>
+        <input 
+          type='text'
+          name='state'
+          placeholder='State' required/>
+        <input
+          type='text'
+          name='type'
+          placeholder='Type of park' required/>
+        <textarea 
+          name='terrain'
+          placeholder='Terrain' required/>
+        <textarea
+          name='features'
+          placeholder='Describe key features of this park.' required/>
+        <button type='submit'>ADD PARK</button>
+      </form>
     </React.Fragment>
   );
 }

@@ -1,10 +1,10 @@
 import React from "react";
-import ParkInformation from "./ParkInformation";
+import ParkController from "./ParkController";
 
 function App() {
   return (
     <React.Fragment>
-      <ParkInformation />
+      <ParkController />
     </React.Fragment>
   );
 }

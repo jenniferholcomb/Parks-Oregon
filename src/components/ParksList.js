@@ -1,14 +1,22 @@
 import React from "react";
+import Park from "./Park";
 import PropTypes from 'prop-types';
 
 function ParksList(props) {
   return (
     <React.Fragment>
-      <h3>{props.name}</h3>
-      <p>{props.location}, {props.state}</p>
-      <p>{props.type}</p>
-      <p>{props.terrain}</p>
-      <p>{props.features}</p>
+      {props.parksList.map((park) => 
+        <Park 
+          whenParkClicked= {props.onParkSelection}
+          name={park.name}
+          location={park.location}
+          state={park.state}
+          type={park.type}
+          terrain={park.terrain}
+          features={park.features}
+          parkId={park.parkId}
+          key={park.parkId} />
+      )}
     </React.Fragment>
   );
 }
@@ -19,7 +27,9 @@ ParksList.propTypes = {
   state: PropTypes.string,
   type: PropTypes.string,
   terrain: PropTypes.string,
-  features: PropTypes.string
+  features: PropTypes.string,
+  parkId: PropTypes.number,
+  whenParkClicked: PropTypes.func
 };
 
 export default ParksList;
