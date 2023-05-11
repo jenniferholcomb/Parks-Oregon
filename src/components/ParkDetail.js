@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import './../index.css';
 
 function ParkDetail(props) {
   const { park, onClickingDelete } = props;
 
   return (
     <React.Fragment>
-      <h1>Park Detail</h1>
+      <h1 className="text-lg text-black font-semibold">Park Detail</h1>
       <h3>Park Name: {park[0].name}</h3>
-      <p><strong>Park Location: </strong>{park[0].location}<br />
+      <p className='text-slate-500 font-medium'><strong>Park Location: </strong>{park[0].location}<br />
          <strong>State: </strong>{park[0].state}</p>
       <p><strong>Type of Park: </strong>{park[0].type}</p>
       <p><strong>Terrain: </strong>{park[0].terrain}<br />

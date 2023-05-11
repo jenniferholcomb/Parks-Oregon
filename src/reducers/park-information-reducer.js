@@ -3,7 +3,6 @@ import * as c from '../actions/ActionTypes';
 const parkInformationReducer = (state, action) => {
   switch (action.type) {
     case c.GET_PARKS_SUCCESS:
-      console.log("here")
       return {
         ...state,
         isLoaded: true,

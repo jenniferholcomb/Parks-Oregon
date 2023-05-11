@@ -201,9 +201,13 @@ function ParkController() {
     return (
       <React.Fragment>
         <button onClick={handleClick}>ADD PARK</button>
-        <ParksList  
-          parksList={parks}
-          onParkSelection={handleChangingParkSelection} />
+        <div className="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4 space-x-2 ">
+        
+            <ParksList  
+              parksList={parks}
+              onParkSelection={handleChangingParkSelection} />
+          
+        </div>
       </React.Fragment>
     );
   }
