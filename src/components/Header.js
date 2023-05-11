@@ -5,11 +5,13 @@ import oregonArt from "./../img/oregon-state-parks.png"
 function Header () {
   return (
     <React.Fragment>
-      <div className="flex bg-lime-900 h-60 min-h-full p-8 gap-x-4">
-        <img className="w-40 m2-20"src={logoArt} alt="Logo" />
-        <img className="w-40 m2-20"src={oregonArt} alt="Logo" />
-        <h1 className="text-slate-50 font-bold antialiased text-2xl tracking-wide" >NATIONAL & STATE PARKS<br />of OREGON</h1>
-        <h3>API</h3>
+      <div className="grid grid-cols-2 gap-4 bg-lime-900 h-60 p-8 ">
+        <div className="col-start-1 col-span-1 flex border-2 items-start gap-7">
+        <img className=" h-1/5 scale-125 m2-20"src={logoArt} alt="Logo" />
+        <img className=" h-1/5 scale-110 m2-20"src={oregonArt} alt="Logo" />
+        <h1 className=" col-span-1 text-slate-50 font-bold antialiased text-xl tracking-wide" >NATIONAL & STATE PARKS<br />of OREGON</h1>
+        </div>
+        <div className='col-start-2 col-span-1 text-slate-50 border-2' >API</div>
       </div>
     </React.Fragment>
   );
