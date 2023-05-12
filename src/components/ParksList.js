@@ -22,13 +22,7 @@ function ParksList(props) {
 }
 
 ParksList.propTypes = {
-  name: PropTypes.string,
-  location: PropTypes.string,
-  state: PropTypes.string,
-  type: PropTypes.string,
-  terrain: PropTypes.string,
-  features: PropTypes.string,
-  parkId: PropTypes.number,
+  park: PropTypes.array,
   whenParkClicked: PropTypes.func
 };
 
