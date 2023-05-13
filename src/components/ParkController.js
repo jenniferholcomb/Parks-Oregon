@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useRef } from "react";
+import React, { useReducer, useRef } from "react";
 import ParksList from "./ParksList";
 import AddParkForm from './AddParkForm';
 import EditParkForm from "./EditParkForm";
@@ -22,6 +22,7 @@ const initialState = {
 function ParkController() {
   const [state, dispatch] = useReducer(parkInformationReducer, initialState);
   const currentParks = useRef(state.parks);
+  const currentSelected = useRef(state.parkSelected);
   
   const handleGettingParks = (auth) => {
     
@@ -196,11 +197,6 @@ function ParkController() {
     }
   };
 
-  const handleEditingClick = () => {
-    const action = getEditFormVisible();
-    dispatch(action);
-  };
-
   const handleChangingParkSelection = (id) => {
     const parkSelectedById = parks.filter(park => park.parkId === id);
     const action = getParkSelection(parkSelectedById);
@@ -209,6 +205,7 @@ function ParkController() {
 
   const { currentUser, error, isLoaded, parks, formVisible, editFormVisible, parkSelected, token } = state;
   currentParks.current = parks;
+  currentSelected.current = parkSelected;
 
   if (currentUser === null) {
     return (
@@ -222,48 +219,68 @@ function ParkController() {
   } else if (formVisible) {
     return (
       <React.Fragment>
-        <AddParkForm
-          onNewParkCreation={handleAddingParks} />
-          <button onClick={handleClick}>BACK TO LIST</button>
+        <div className="grid grid-cols-8">
+          <div className="ml-6 mt-2">
+            <button onClick={() => dispatch(getReset())}
+                    className="mt-2 px-6 py-2 text-white bg-blue-600 rounded-lg w-48 hover:bg-blue-900">BACK TO LIST</button>
+          </div>   
+          <div className="col-span-7 mr-44 ">    
+            <AddParkForm
+              onNewParkCreation={handleAddingParks} />
+          </div>
+        </div>
       </React.Fragment>
     )
   } else if (editFormVisible) {
     return (
       <React.Fragment>
-        <EditParkForm
-          onEditParkCreation={handleEditingPark}
-          park={parkSelected} />
+        <div className="grid grid-cols-8">
+          <div className="ml-6 mt-2">
+            <button onClick={() => dispatch(getReset())}
+                    className="mt-2 px-6 py-2 text-white bg-blue-600 rounded-lg w-48 hover:bg-blue-900">BACK TO LIST</button>
+          </div>  
+          <div className="col-span-7 mr-44 ">  
+            <EditParkForm
+              onEditParkCreation={handleEditingPark}
+              park={parkSelected} />
+          </div>
+        </div>
       </React.Fragment>
     )
   } else if (parkSelected !== null) {
     return (
       <React.Fragment>
         <ParkDetail
-          park={parkSelected}
-          onClickingEdit={handleEditingClick}
+          park={currentSelected}
+          onClickingEdit={() => dispatch(getEditFormVisible())}
           onClickingDelete={handleDeletingClick}
+          onReturnToList={() => dispatch(getReset())}
         />
-        <button onClick={handleClick}>BACK TO LIST</button>
       </React.Fragment>
     )
   } else {
     return (
       <React.Fragment>
-        <button onClick={handleClick}>ADD NEW PARK</button>
-        <button onClick={() => dispatch(getSignOut())}>SIGN OUT</button>
- 
-        
-            <ParksList  
-              parksList={parks}
-              onParkSelection={handleChangingParkSelection} />
-          
-        
+        <div className="grid grid-cols-8">
+          <div className="pl-6">
+            <button onClick={handleClick}
+                    className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg w-48 hover:bg-blue-900">ADD NEW PARK</button><br />
+            <button onClick={() => dispatch(getSignOut())}
+                    className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg w-48 hover:bg-blue-900">SIGN OUT</button>
+          </div> 
+          <div className="col-span-7 mt-4"> 
+            <div className="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4 space-x-2 ">
+                <ParksList  
+                  parksList={parks}
+                  onParkSelection={handleChangingParkSelection} />
+            </div>
+            
+          </div>
+        </div>
       </React.Fragment>
     );
   }
 }
 
 export default ParkController;
-
-       {/* <div className="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4 space-x-2 "> */}
 

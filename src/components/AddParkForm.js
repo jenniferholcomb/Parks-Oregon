@@ -17,31 +17,64 @@ function AddParkForm(props) {
 
   return (
     <React.Fragment>
-      <form onSubmit={handleNewParkSubmission}>
-        <input
-          type='text'
-          name='name'
-          placeholder='Park Name' required/>
-        <input 
-          type='text'
-          name='location'
-          placeholder='Location' required/>
-        <input 
-          type='text'
-          name='state'
-          placeholder='State' required/>
-        <input
-          type='text'
-          name='type'
-          placeholder='Type of park' required/>
-        <textarea 
-          name='terrain'
-          placeholder='Terrain' required/>
-        <textarea
-          name='features'
-          placeholder='Describe key features of this park.' required/>
-        <button type='submit'>ADD PARK</button>
-      </form>
+      <div className="flex items-center justify-center min-h-min ">
+        <div className="px-8 py-6 mt-4 text-left bg-white rounded-2xl shadow-lg">
+        <h1 className="text-2xl font-bold text-center">ADD PARK</h1><br /><hr />
+          <form onSubmit={handleNewParkSubmission}>
+            <div class="mt-4 grid grid-cols-2 gap-4">
+              <div>
+                <label class="block" for="name">PARK NAME</label>
+                <input
+                  type='text'
+                  name='name' 
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="Location">LOCATION</label>
+                <input
+                  type='text'
+                  name='location' 
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="State">STATE</label>
+                <input
+                  type='text'
+                  name='state' 
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="type">TYPE OF PARK</label>
+                <input
+                  type='text'
+                  name='name' 
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="terrain">TERRAIN</label>
+                <textarea
+                  type='text'
+                  name='terrain' 
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="features">PARK FEATURES</label>
+                <textarea
+                  type='text'
+                  name='features' 
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <button class="col-span-2 px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 center">ADD NEW PARK</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </React.Fragment>
   );
 }

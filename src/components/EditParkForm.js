@@ -21,43 +21,74 @@ function EditParkForm(props) {
   return (
 
     <React.Fragment>
-      <form onSubmit={handleEditParkSubmission}>  
-        <input
-          label='name'
-          type='text'
-          name='name'
-          placeholder={park[0].name} 
-          defaultValue={park[0].name} required/>
-        <input 
-          label='location'
-          type='text'
-          name='location'
-          placeholder={park[0].location} 
-          defaultValue={park[0].location} required/>
-        <input 
-          label='state'
-          type={park[0].state}
-          name='state'
-          placeholder={park[0].state}
-          defaultValue={park[0].state}  required/>
-        <input
-          label='type'
-          type='text'
-          name='type'
-          placeholder={park[0].type}
-          defaultValue={park[0].type}  required/>
-        <textarea 
-          label='terrain'
-          name='terrain'
-          placeholder={park[0].terrain}
-          defaultValue={park[0].terrain}  required/>
-        <textarea
-          label='features'
-          name='features'
-          placeholder={park[0].features}
-          defaultValue={park[0].features}  required/>
-        <button type='submit'>UPDATE PARK</button>
-      </form>
+      <div className="flex items-center justify-center min-h-min ">
+        <div className="px-8 py-6 mt-4 text-left bg-white rounded-2xl shadow-lg">
+        <h1 className="text-2xl font-bold text-center">UPDATE PARK</h1><br /><hr />
+          <form onSubmit={handleEditParkSubmission}>
+            <div class="mt-4 grid grid-cols-2 gap-4">
+              <div>
+                <label class="block" for="name">PARK NAME</label>
+                <input
+                  type='text'
+                  name='name'
+                  placeholder={park[0].name} 
+                  defaultValue={park[0].name}
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="Location">LOCATION</label>
+                <input
+                  type='text'
+                  name='location'
+                  placeholder={park[0].location} 
+                  defaultValue={park[0].location}            
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="State">STATE</label>
+                <input
+                  type='text'
+                  name='state'
+                  placeholder={park[0].state}
+                  defaultValue={park[0].state}                   
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="type">TYPE OF PARK</label>
+                <input
+                  type='text'
+                  name='type'
+                  placeholder={park[0].type}
+                  defaultValue={park[0].type}                
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="terrain">TERRAIN</label>
+                <textarea
+                  name='terrain'
+                  placeholder={park[0].terrain}
+                  defaultValue={park[0].terrain} 
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <div>
+                <label class="block" for="features">PARK FEATURES</label>
+                <textarea
+                  name='features'
+                  placeholder={park[0].features}
+                  defaultValue={park[0].features}                 
+                  required
+                  className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+              </div>
+              <button class="col-span-2 px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 center">UPDATE PARK</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </React.Fragment>
   );
 }
