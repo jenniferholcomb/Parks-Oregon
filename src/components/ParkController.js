@@ -25,7 +25,6 @@ function ParkController() {
   
   const handleGettingParks = (auth) => {
     
-      console.log(token);
       fetch('https://localhost:5001/api/Parks/', {
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +92,8 @@ function ParkController() {
         features: newBody.features
       }),
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
       },
     })
     .then(response => {
@@ -104,7 +104,7 @@ function ParkController() {
       }
     })
     .then(() => {
-      handleGettingParks();
+      handleGettingParks(token);
     })
     .then(() => {
       const action = getReset();
@@ -129,7 +129,8 @@ function ParkController() {
         features: parkToEdit.features
       }),
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
       },
     })
     .then(response => {
@@ -138,7 +139,7 @@ function ParkController() {
       } 
     })
     .then(() => {
-      handleGettingParks();
+      handleGettingParks(token);
       setTimeout(() => {
         const action = getEditParkSuccess(
           currentParks.current.filter(park => park.parkId === parkSelected[0].parkId)
@@ -154,7 +155,11 @@ function ParkController() {
 
   const handleDeletingClick = async (id) => {
     await fetch(`https://localhost:5001/api/Parks/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+      },
     })
     .then(response => {
         console.log(response);
@@ -167,7 +172,7 @@ function ParkController() {
         dispatch(action);
     })
     .then(() => {
-      handleGettingParks();
+      handleGettingParks(token);
     })
     .catch((error) => {
       const action = getParksFailure(error);
