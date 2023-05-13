@@ -6,7 +6,8 @@ const parkInformationReducer = (state, action) => {
       return {
         ...state,
         isLoaded: true,
-        parks: action.parks
+        parks: action.parks,
+        tokenLoaded: false
       };
     case c.GET_PARKS_FAILURE:
       return {
@@ -35,6 +36,11 @@ const parkInformationReducer = (state, action) => {
       return {
         ...state,
         editFormVisible: true
+      }
+    case c.GET_TOKEN_SUCCESS:
+      return {
+        ...state,
+        token: action.token
       }
     case c.GET_RESET:
       return {

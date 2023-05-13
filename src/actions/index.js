@@ -31,3 +31,8 @@ export const getEditFormVisible = () => ({
 export const getReset = () => ({
   type: c.GET_RESET
 });
+
+export const getTokenSuccess = (token) => ({
+  type: c.GET_TOKEN_SUCCESS,
+  token
+});

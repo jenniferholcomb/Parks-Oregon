@@ -5,7 +5,7 @@ import EditParkForm from "./EditParkForm";
 import ParkDetail from "./ParkDetail";
 import parkInformationReducer from "../reducers/park-information-reducer";
 import { getParksFailure, getParksSuccess, getFormVisible, getParkSelection,
-         getEditParkSuccess, getEditFormVisible, getReset } from '../actions/index';
+         getEditParkSuccess, getEditFormVisible, getReset, getTokenSuccess } from '../actions/index';
 
 const initialState = {
   isLoaded: false,
@@ -13,39 +13,74 @@ const initialState = {
   error: null,
   formVisible: false,
   editFormVisible: false,
-  parkSelected: null
+  parkSelected: null,
+  token: null
 };
 
 function ParkController() {
   const [state, dispatch] = useReducer(parkInformationReducer, initialState);
   const currentParks = useRef(state.parks);
+  const currentToken = useRef(state.token);
   
-  const handleGettingParks = async () => {
-    await fetch('https://localhost:5001/api/Parks/', {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3000"
-      }
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`There is an error`);
-        } else {
-          return response.json()
+  const handleGettingParks = (auth) => {
+    
+      console.log(token);
+      fetch('https://localhost:5001/api/Parks/', {
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${auth}`
         }
       })
-      .then((jsonifiedResponse) => {
-        const action = getParksSuccess(jsonifiedResponse);
-        dispatch(action);
-      })
-      .catch((error) => {
-        const action = getParksFailure(error);
-        dispatch(action);
-      });
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`There is an error`);
+          } else {
+            return response.json()
+          }
+        })
+        .then((jsonifiedResponse) => {
+          const action = getParksSuccess(jsonifiedResponse);
+          dispatch(action);
+        })
+        .catch((error) => {
+          const action = getParksFailure(error);
+          dispatch(action);
+        });
+  
+
+    
   }
 
   useEffect(() => {
-    handleGettingParks();
+    fetch('https://localhost:5001/api/token/', {
+      method: 'POST',
+      body: JSON.stringify({
+          "userInfoId": 1,
+          "displayName": "Test",
+          "userName": "test123",
+          "email": "test@test.com",
+          "password": "Test1234"
+      }),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`There is an error`);
+      } else {
+        return response.text();
+      }
+    })
+    .then((jsonifiedResponse) => {
+      handleGettingParks(jsonifiedResponse);
+      const action = getTokenSuccess(jsonifiedResponse);
+      dispatch(action);
+    })
+    .catch((error) => {
+      const action = getParksFailure(error);
+      dispatch(action);
+    });
   }, [])
 
   const handleAddingParks = async (newBody) => {
@@ -99,24 +134,24 @@ function ParkController() {
         'Content-Type': 'application/json; charset=utf-8',
       },
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`There is an error`); 
-        } 
-      })
-      .then(() => {
-        handleGettingParks();
-        setTimeout(() => {
-          const action = getEditParkSuccess(
-            currentParks.current.filter(park => park.parkId === parkSelected[0].parkId)
-          );
-          dispatch(action);
-        }, 1000)
-      })
-      .catch((error) => {
-        const action = getParksFailure(error);
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`There is an error`); 
+      } 
+    })
+    .then(() => {
+      handleGettingParks();
+      setTimeout(() => {
+        const action = getEditParkSuccess(
+          currentParks.current.filter(park => park.parkId === parkSelected[0].parkId)
+        );
         dispatch(action);
-      });
+      }, 1000)
+    })
+    .catch((error) => {
+      const action = getParksFailure(error);
+      dispatch(action);
+    });
   }
 
   const handleDeletingClick = async (id) => {
@@ -163,11 +198,12 @@ function ParkController() {
     dispatch(action);
   };
 
-  const { error, isLoaded, parks, formVisible, editFormVisible, parkSelected } = state;
-  currentParks.current = parks
+  const { error, isLoaded, parks, formVisible, editFormVisible, parkSelected, token } = state;
+  currentParks.current = parks;
+  currentToken.current = token;
 
   if (error) {
-    return <h1>Error: {error}</h1>;
+    return <h1>Error: There is an error</h1>;
   } else if (!isLoaded) {
     return <h1>...Loading...</h1>;
   } else if (formVisible) {
