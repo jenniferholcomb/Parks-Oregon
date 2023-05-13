@@ -26,7 +26,7 @@ function ParkController() {
   
   const handleGettingParks = (auth) => {
     
-      fetch('https://localhost:5001/api/Parks/', {
+      fetch('https://parks-api.azurewebsites.net/api/Parks/', {
         headers: {
           "Content-Type": "application/json",
           'Authorization': `Bearer ${auth}`
@@ -50,7 +50,7 @@ function ParkController() {
   }
 
   const handleGettingToken = (credentials) => {
-    fetch('https://localhost:5001/api/token/', {
+    fetch('https://parks-api.azurewebsites.net/api/token/', {
       method: 'POST',
       body: JSON.stringify({
           "userInfoId": 1,
@@ -82,7 +82,7 @@ function ParkController() {
   }
 
   const handleAddingParks = async (newBody) => {
-    await fetch('https://localhost:5001/api/Parks/', {
+    await fetch('https://parks-api.azurewebsites.net/api/Parks/', {
       method: 'POST',
       body: JSON.stringify({
         name: newBody.name,
@@ -118,7 +118,7 @@ function ParkController() {
   }
 
   const handleEditingPark = async (parkToEdit) => {
-    await fetch(`https://localhost:5001/api/Parks/${parkToEdit.parkId}`, {
+    await fetch(`parks-api.azurewebsites.net/api/Parks/${parkToEdit.parkId}`, {
       method: 'PUT',
       body: JSON.stringify({
         parkId:parkToEdit.parkId,
@@ -155,7 +155,7 @@ function ParkController() {
   }
 
   const handleDeletingClick = async (id) => {
-    await fetch(`https://localhost:5001/api/Parks/${id}`, {
+    await fetch(`https://parks-api.azurewebsites.net/api/Parks/${id}`, {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
