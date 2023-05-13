@@ -2,6 +2,11 @@ import * as c from '../actions/ActionTypes';
 
 const parkInformationReducer = (state, action) => {
   switch (action.type) {
+    case c.GET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: action.credentials
+      };
     case c.GET_PARKS_SUCCESS:
       return {
         ...state,

@@ -1,36 +1,37 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-function SignIn(){  
+function SignIn(props){  
 
-  function doSignUp(event) {
+  function doSignIn(event) {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // User successfully signed up 
-      })
-      .catch((error) => {
-        // There was an error with sign up
-      });
+    props.onSignInCredentials({
+      email: 'test@test.com',
+      password: 'Test1234'
+    });
   }
 
   return (
     <React.Fragment>
-      <h1>Sign up</h1>
-      <form onSubmit={doSignUp}>
+      <h1>Sign In</h1>
+      <p><em>Please click submit to sign-in</em></p>
+      <form onSubmit={doSignIn}>
         <input
           type='text'
           name='email'
-          placeholder='email' />
+          placeholder='test@test.com' />
         <input
           type='password'
           name='password'
-          placeholder='Password' />
-        <button type='submit'>Sign up</button>
+          placeholder='Test1234' />
+        <button type='submit'>Sign In</button>
       </form>
     </React.Fragment>
   );
 }
 
-export default SignIn
+SignIn.propTypes = {
+  onSignInCredentials: PropTypes.func
+};
+
+export default SignIn;

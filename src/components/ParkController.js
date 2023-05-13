@@ -3,11 +3,13 @@ import ParksList from "./ParksList";
 import AddParkForm from './AddParkForm';
 import EditParkForm from "./EditParkForm";
 import ParkDetail from "./ParkDetail";
+import SignIn from "./SignIn";
 import parkInformationReducer from "../reducers/park-information-reducer";
-import { getParksFailure, getParksSuccess, getFormVisible, getParkSelection,
+import { getCurrentUser, getParksFailure, getParksSuccess, getFormVisible, getParkSelection,
          getEditParkSuccess, getEditFormVisible, getReset, getTokenSuccess } from '../actions/index';
 
 const initialState = {
+  currentUser: null,
   isLoaded: false,
   parks: [],
   error: null,
@@ -20,7 +22,6 @@ const initialState = {
 function ParkController() {
   const [state, dispatch] = useReducer(parkInformationReducer, initialState);
   const currentParks = useRef(state.parks);
-  const currentToken = useRef(state.token);
   
   const handleGettingParks = (auth) => {
     
@@ -46,20 +47,17 @@ function ParkController() {
           const action = getParksFailure(error);
           dispatch(action);
         });
-  
-
-    
   }
 
-  useEffect(() => {
+  const handleGettingToken = (credentials) => {
     fetch('https://localhost:5001/api/token/', {
       method: 'POST',
       body: JSON.stringify({
           "userInfoId": 1,
           "displayName": "Test",
           "userName": "test123",
-          "email": "test@test.com",
-          "password": "Test1234"
+          "email": `${credentials.email}`,
+          "password": `${credentials.password}`
       }),
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
@@ -81,7 +79,7 @@ function ParkController() {
       const action = getParksFailure(error);
       dispatch(action);
     });
-  }, [])
+  }
 
   const handleAddingParks = async (newBody) => {
     await fetch('https://localhost:5001/api/Parks/', {
@@ -177,6 +175,12 @@ function ParkController() {
     });
   };
 
+  const handleSigningIn = (credentials) => {
+    handleGettingToken(credentials);
+    const action = getCurrentUser(credentials);
+    dispatch(action);
+  }
+
   const handleClick = () => {
     if (parkSelected !== null) {
       const action = getReset();
@@ -198,11 +202,15 @@ function ParkController() {
     dispatch(action);
   };
 
-  const { error, isLoaded, parks, formVisible, editFormVisible, parkSelected, token } = state;
+  const { currentUser, error, isLoaded, parks, formVisible, editFormVisible, parkSelected, token } = state;
   currentParks.current = parks;
-  currentToken.current = token;
 
-  if (error) {
+  if (currentUser === null) {
+    return (
+    <SignIn
+      onSignInCredentials={handleSigningIn} />
+    )
+  } else if (error) {
     return <h1>Error: There is an error</h1>;
   } else if (!isLoaded) {
     return <h1>...Loading...</h1>;
@@ -250,3 +258,4 @@ function ParkController() {
 }
 
 export default ParkController;
+

@@ -1,7 +1,6 @@
 import React from "react";
 import logoArt from "./../img/parks-art.png"
 import oregonArt from "./../img/oregon-state-parks.png"
-import { Link } from "react-router-dom";
 
 function Header () {
   return (
@@ -12,14 +11,6 @@ function Header () {
         <img className=" h-1/5 scale-110 m2-20"src={oregonArt} alt="Logo" />
         <h1 className=" col-span-1 text-slate-50 font-bold antialiased text-xl tracking-wide" >NATIONAL & STATE PARKS<br />of OREGON</h1>
         </div>
-        <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/sign-in">Sign In</Link>
-        </li>
-      </ul>
         <div className='col-start-2 col-span-1 text-slate-50 border-2' >API</div>
       </div>
     </React.Fragment>

@@ -1,5 +1,10 @@
 import * as c from './ActionTypes';
 
+export const getCurrentUser = (credentials) => ({
+  type: c.GET_CURRENT_USER,
+  credentials
+});
+
 export const getParksSuccess = (parks) => ({
   type: c.GET_PARKS_SUCCESS,
   parks
