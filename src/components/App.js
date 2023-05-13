@@ -5,9 +5,9 @@ import Header from "./Header";
 function App() {
   return (
     <React.Fragment>
-      <Header />
-      <div className="bg-yellow-50 pb-8">
-        <ParkController />
+      <div className="">
+        <Header />
+  
       </div>
     </React.Fragment>
   );

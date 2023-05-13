@@ -251,17 +251,19 @@ function ParkController() {
       <React.Fragment>
         <button onClick={handleClick}>ADD NEW PARK</button>
         <button onClick={() => dispatch(getSignOut())}>SIGN OUT</button>
-        <div className="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4 space-x-2 ">
+ 
         
             <ParksList  
               parksList={parks}
               onParkSelection={handleChangingParkSelection} />
           
-        </div>
+        
       </React.Fragment>
     );
   }
 }
 
 export default ParkController;
+
+       {/* <div className="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4 space-x-2 "> */}
 
