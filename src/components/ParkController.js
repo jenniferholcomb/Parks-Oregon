@@ -6,7 +6,7 @@ import ParkDetail from "./ParkDetail";
 import SignIn from "./SignIn";
 import parkInformationReducer from "../reducers/park-information-reducer";
 import { getCurrentUser, getParksFailure, getParksSuccess, getFormVisible, getParkSelection,
-         getEditParkSuccess, getEditFormVisible, getReset, getTokenSuccess } from '../actions/index';
+         getEditParkSuccess, getEditFormVisible, getReset, getTokenSuccess, getSignOut } from '../actions/index';
 
 const initialState = {
   currentUser: null,
@@ -249,7 +249,8 @@ function ParkController() {
   } else {
     return (
       <React.Fragment>
-        <button onClick={handleClick}>ADD PARK</button>
+        <button onClick={handleClick}>ADD NEW PARK</button>
+        <button onClick={() => dispatch(getSignOut())}>SIGN OUT</button>
         <div className="flex flex-row flex-wrap justify-center gap-x-8 gap-y-4 space-x-2 ">
         
             <ParksList  

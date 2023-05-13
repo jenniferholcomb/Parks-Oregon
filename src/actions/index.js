@@ -41,3 +41,8 @@ export const getTokenSuccess = (token) => ({
   type: c.GET_TOKEN_SUCCESS,
   token
 });
+
+export const getSignOut = () => ({
+  type: c.GET_SIGNOUT
+});
+

@@ -26,7 +26,6 @@ const parkInformationReducer = (state, action) => {
         formVisible: true
       }
     case c.GET_EDIT_PARK_SUCCESS:
-      console.log(state.parkSelected)
       return {
         ...state,
         editFormVisible: false,
@@ -53,6 +52,11 @@ const parkInformationReducer = (state, action) => {
         formVisible: false,
         editFormVisible: false,
         parkSelected: null
+      }
+    case c.GET_SIGNOUT:
+      return {
+        ...state,
+        currentUser: null
       }
     default:
       throw new Error(`There is no action matching ${action.type}.`);
