@@ -13,19 +13,37 @@ function SignIn(props){
 
   return (
     <React.Fragment>
-      <h1>Sign In</h1>
-      <p><em>Please click submit to sign-in</em></p>
-      <form onSubmit={doSignIn}>
-        <input
-          type='text'
-          name='email'
-          placeholder='test@test.com' />
-        <input
-          type='password'
-          name='password'
-          placeholder='Test1234' />
-        <button type='submit'>Sign In</button>
-      </form>
+      <div className="flex items-center justify-center min-h-min mt-20">
+        <div className="px-8 py-6 mt-4 text-left bg-white rounded-2xl shadow-lg">
+      <h1 className="text-2xl font-bold text-center">Login to API</h1>
+        <form onSubmit={doSignIn}>
+          <div class="mt-4">
+            <div>
+              <label class="block" for="email">Email</label>
+              <input
+                type='text'
+                name='email'
+                placeholder='test@test.com' 
+                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+            </div>
+            <div>
+              <label class="block" for="password">Password</label>
+              <input
+                type='password'
+                name='password'
+                placeholder='Test1234'
+                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+            </div>
+            <div class="flex items-baseline justify-between">
+              <button 
+                type="submit"
+                class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Login</button>
+              <p className="text-right"><em>Welcome!<br />This is a sample application,<br/>please click login to view more.</em></p>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
     </React.Fragment>
   );
 }
