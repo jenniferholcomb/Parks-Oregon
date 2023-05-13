@@ -215,7 +215,7 @@ function ParkController() {
   } else if (error) {
     return <h1>Error: There is an error</h1>;
   } else if (!isLoaded) {
-    return <h1>...Loading...</h1>;
+    return <h1 className="text-xl font-bold text-center">...Loading...</h1>;
   } else if (formVisible) {
     return (
       <React.Fragment>

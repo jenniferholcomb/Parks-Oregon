@@ -9,7 +9,7 @@ function EditParkForm(props) {
     event.preventDefault();
     props.onEditParkCreation({
       name: event.target.name.value,
-      location: event.target.name.value,
+      location: event.target.location.value,
       state: event.target.state.value,
       type: event.target.type.value,
       terrain: event.target.terrain.value,
@@ -25,9 +25,9 @@ function EditParkForm(props) {
         <div className="px-8 py-6 mt-4 text-left bg-white rounded-2xl shadow-lg">
         <h1 className="text-2xl font-bold text-center">UPDATE PARK</h1><br /><hr />
           <form onSubmit={handleEditParkSubmission}>
-            <div class="mt-4 grid grid-cols-2 gap-4">
+            <div className="mt-4 grid grid-cols-2 gap-4">
               <div>
-                <label class="block" for="name">PARK NAME</label>
+                <label className="block" htmlFor="name">PARK NAME</label>
                 <input
                   type='text'
                   name='name'
@@ -37,7 +37,7 @@ function EditParkForm(props) {
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
               </div>
               <div>
-                <label class="block" for="Location">LOCATION</label>
+                <label className="block" htmlFor="Location">LOCATION</label>
                 <input
                   type='text'
                   name='location'
@@ -47,7 +47,7 @@ function EditParkForm(props) {
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
               </div>
               <div>
-                <label class="block" for="State">STATE</label>
+                <label className="block" htmlFor="State">STATE</label>
                 <input
                   type='text'
                   name='state'
@@ -57,7 +57,7 @@ function EditParkForm(props) {
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
               </div>
               <div>
-                <label class="block" for="type">TYPE OF PARK</label>
+                <label className="block" htmlFor="type">TYPE OF PARK</label>
                 <input
                   type='text'
                   name='type'
@@ -67,7 +67,7 @@ function EditParkForm(props) {
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
               </div>
               <div>
-                <label class="block" for="terrain">TERRAIN</label>
+                <label className="block" htmlFor="terrain">TERRAIN</label>
                 <textarea
                   name='terrain'
                   placeholder={park[0].terrain}
@@ -76,7 +76,7 @@ function EditParkForm(props) {
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"/>
               </div>
               <div>
-                <label class="block" for="features">PARK FEATURES</label>
+                <label className="block" htmlFor="features">PARK FEATURES</label>
                 <textarea
                   name='features'
                   placeholder={park[0].features}
