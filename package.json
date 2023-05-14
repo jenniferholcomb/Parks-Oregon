@@ -1,8 +1,9 @@
 {
+  "homepage": "https://jenniferholcomb.github.io/parks-oregon.git",
   "name": "parks-oregon",
   "version": "0.1.0",
   "repository": {
-    "url": "git+https://github.com/jenniferholcomb/Parks-Oregon.git"
+    "url": "git+https://github.com/jenniferholcomb/parks-oregon.git"
   },
   "private": true,
   "proxy": "http://localhost:5001/",
