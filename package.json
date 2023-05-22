@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
-    "css": "^3.0.0"
+    "css": "^3.0.0",
+    "gh-pages": "^5.0.0"
   }
 }
