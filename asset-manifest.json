@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Parks-Oregon/static/css/main.a986d6da.css",
+    "main.js": "/Parks-Oregon/static/js/main.0169508f.js",
+    "static/media/oregon-state-parks.png": "/Parks-Oregon/static/media/oregon-state-parks.cb8b588cbd627ef28254.png",
+    "static/media/parks-art.png": "/Parks-Oregon/static/media/parks-art.b866b4810f101980849c.png",
+    "index.html": "/Parks-Oregon/index.html",
+    "main.a986d6da.css.map": "/Parks-Oregon/static/css/main.a986d6da.css.map",
+    "main.0169508f.js.map": "/Parks-Oregon/static/js/main.0169508f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a986d6da.css",
+    "static/js/main.0169508f.js"
+  ]
+}
