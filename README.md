@@ -1,4 +1,4 @@
-# National and State Parks Api
+# National and State Parks API
 
 #### By: Jennifer Holcomb
 
